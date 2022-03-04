@@ -1,4 +1,3 @@
-const res = require('express/lib/response');
 const Account = require('../model/Account.js')
 
 exports.getAllAccounts = (request, response) => {
@@ -24,7 +23,6 @@ exports.transfer = (request, response) => {
 
     validateAccountType(accountType);
 
-    //transferBalance(beneficiaryAccountNumber, senderAccountNumber, balance);
     let creditBalance = creditAccount(beneficiaryAccountNumber, balance);
     let debitBalance = debitAccount(senderAccountNumber, balance);
 
@@ -32,6 +30,17 @@ exports.transfer = (request, response) => {
         "debitBalance": debitBalance,
         "creditBalance": creditBalance
     });
+}
+
+exports.transferBalance = function(beneficiaryAccountNumber, senderAccountNumber, accountType, balance) {
+    validateAccountType(accountType);
+    let creditBalance = creditAccount(beneficiaryAccountNumber, balance);
+    let debitBalance = debitAccount(senderAccountNumber, balance);
+
+    return {
+            "debitBalance": debitBalance,
+            "creditBalance": creditBalance
+           }
 }
 
 validateAccountType = function(accountType) {
@@ -43,10 +52,11 @@ validateAccountType = function(accountType) {
 creditAccount = function(beneficiaryAccountNumber, balance) {
     let updatedBalance = 0;
     for(acc in Account) {
-        if(Account[acc].accountNumber == beneficiaryAccountNumber) {
+        if(Account[acc].accountNumber === beneficiaryAccountNumber) {
             updatedBalance = Account[acc].balance += balance;
         }
     }
+    console.log("balance: " + updatedBalance);
     return updatedBalance;
 }
 
@@ -57,6 +67,7 @@ debitAccount = function(senderAccountNumber, balance) {
             updatedBalance = Account[acc].balance -= balance
         }
     }
+    console.log("balance: " + updatedBalance);
     return updatedBalance;
 }
 

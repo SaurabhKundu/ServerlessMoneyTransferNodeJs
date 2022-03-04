@@ -2,7 +2,7 @@ module.exports = [
 {
     accountNumber: 'acc1',
     accountType: 'SAVINGS',
-    balance: 100,
+    balance: 500,
     isActive: true
 },
 {
