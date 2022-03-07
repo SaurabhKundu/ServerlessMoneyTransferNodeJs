@@ -1,0 +1,7 @@
+{
+    "beneficiaryAccountNumber": "acc1",
+    "senderAccountNumber": "acc2",
+    "accountType": "SAVINGS",
+    "balance": 100
+}
+  
