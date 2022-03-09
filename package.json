@@ -4,11 +4,13 @@
   "description": "A simple serverless money transfer application using nodejs",
   "main": "index.js",
   "scripts": {
+    "codegen": "rm -rf src/generated-sources/openapi; openapi-generator-cli generate -i ./transfer.openapi.yaml -g nodejs-express-server -o src/generated-sources/openapi --additional-properties=supportsES6=true,npmVersion=6.9.0,typescriptThreePlus=true",
     "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@openapitools/openapi-generator-cli": "^2.4.26",
     "aws-sdk": "^2.1086.0",
     "express": "^4.17.3",
     "jest": "^27.5.1"
